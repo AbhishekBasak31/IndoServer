@@ -100,7 +100,7 @@ const allowedOrigins = new Set([
   `http://${localIP}:5174`,
   `http://${localIP}:8080`,
   `http://${localIP}:8086`,
-  "https://fingertip.co.in", // ✅ PRODUCTION ORIGIN
+  "https://indoconnect.co.in", // ✅ PRODUCTION ORIGIN
 ]);
 
 // Optional env-based origin (safe)
