@@ -25,34 +25,34 @@ export const createContact = async (req, res) => {
     });
     await newContact.save();
 
-    // 3. Send Email (Non-blocking)
-    // We don't want to fail the request if the email server is down, just log the error.
-    try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT),
-        secure: false, 
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-      });
+    // // 3. Send Email (Non-blocking)
+    // // We don't want to fail the request if the email server is down, just log the error.
+    // try {
+    //   const transporter = nodemailer.createTransport({
+    //     host: process.env.SMTP_HOST,
+    //     port: Number(process.env.SMTP_PORT),
+    //     secure: false, 
+    //     auth: {
+    //       user: process.env.SMTP_USER,
+    //       pass: process.env.SMTP_PASS,
+    //     },
+    //   });
 
-      await transporter.sendMail({
-        from: `"${name}" <${email}>`, 
-        to: process.env.SMTP_USER, 
-        subject: 'New Customer General Inquiry',
-        html: `
-          <h3>New Inquiry Received</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Message:</strong><br/>${message}</p>
-        `,
-      });
-    } catch (emailErr) {
-      console.error('❌ Email sending warning:', emailErr.message);
-    }
+    //   await transporter.sendMail({
+    //     from: `"${name}" <${email}>`, 
+    //     to: process.env.SMTP_USER, 
+    //     subject: 'New Customer General Inquiry',
+    //     html: `
+    //       <h3>New Inquiry Received</h3>
+    //       <p><strong>Name:</strong> ${name}</p>
+    //       <p><strong>Email:</strong> ${email}</p>
+    //       <p><strong>Phone:</strong> ${phone}</p>
+    //       <p><strong>Message:</strong><br/>${message}</p>
+    //     `,
+    //   });
+    // } catch (emailErr) {
+    //   console.error('❌ Email sending warning:', emailErr.message);
+    // }
 
     // 4. Response
     return res.status(201).json({ 

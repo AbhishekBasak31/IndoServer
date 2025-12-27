@@ -26,36 +26,36 @@ export const createEnquiry = async (req, res) => {
 
     await newEnquiry.save();
 
-    // 3. Email Configuration
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: false, 
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    // // 3. Email Configuration
+    // const transporter = nodemailer.createTransport({
+    //   host: process.env.SMTP_HOST,
+    //   port: Number(process.env.SMTP_PORT),
+    //   secure: false, 
+    //   auth: {
+    //     user: process.env.SMTP_USER,
+    //     pass: process.env.SMTP_PASS,
+    //   },
+    // });
 
-    // 4. Send Email Notification
-    const mailOptions = {
-      from: email, 
-      to: "realstate694@gmail.com", // Target email
-      subject: `New Product Enquiry from ${name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-          <h3 style="color: #333;">New Customer Enquiry</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <hr style="border-top: 1px solid #eee;" />
-          <h4 style="color: #555;">Message:</h4>
-          <p style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">${enquirie}</p>
-        </div>
-      `,
-    };
+    // // 4. Send Email Notification
+    // const mailOptions = {
+    //   from: email, 
+    //   to: "realstate694@gmail.com", // Target email
+    //   subject: `New Product Enquiry from ${name}`,
+    //   html: `
+    //     <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
+    //       <h3 style="color: #333;">New Customer Enquiry</h3>
+    //       <p><strong>Name:</strong> ${name}</p>
+    //       <p><strong>Email:</strong> ${email}</p>
+    //       <p><strong>Phone:</strong> ${phone}</p>
+    //       <hr style="border-top: 1px solid #eee;" />
+    //       <h4 style="color: #555;">Message:</h4>
+    //       <p style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">${enquirie}</p>
+    //     </div>
+    //   `,
+    // };
 
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
 
     return res.status(201).json({
       success: true,
